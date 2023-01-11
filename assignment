@@ -53,12 +53,6 @@ How much python use memory for different data type?
 
 Unlike ‘C’, Python doesn’t specify data type before assigning value to object. Thus, different data objects behave differently with python
 On different systems (32 Bit, 64 Bit, Linux, Windows) python use different Byte data for the same object
-Debug Memory usage
-How to profile and check Memory usage by your script?
-
-Form of dynamic program analysis to measure usage of resources by the program to optimize our program (e.g. memory profiling for memory usage analysis)
-Profilers use a wide variety of techniques to collect data, including hardware interrupts code instrumentation, instruction set simulation, operating system hooks, and performance counters. Profilers are used in the performance engineering process.
-Program analysis tools are extremely important for understanding program behavior. Computer architects need such tools to evaluate how well programs will perform on new architectures. Software writers need tools to analyze their programs and identify critical sections of code. Compiler writers often use such tools to find out how well their instruction scheduling or branch prediction algorithm is performing…
 
 Some tool to debug
 Memory_profiler: https://pypi.python.org/pypi/memory_profiler
