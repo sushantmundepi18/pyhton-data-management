@@ -1,0 +1,67 @@
+PYTHON MEMORY MANAGEMENT
+
+Some terms :
+
+Memory Leak : Memory leak occurs when programmers create a memory in heap and forget to delete it. Memory leaks are particularly serious issues for programs like daemons and servers, which by definition, never terminate.
+Garbage Collection : Garbage Collection is a process of reclaiming the runtime unused memory automatically. Resources other than memory, such as network sockets, database handles, user interaction windows, and file and device descriptors, are not typically handled by garbage collection. Methods used to manage such resources, particularly destructors, may suffice to manage memory as well, leaving no need for GC.
+Manual Garbage collection : Garbage collectors typically do not attempt to optimize the use of resources other than memory. If you only want throughput then you don’t need to do manual garbage collection, but if you have resource constraint then you need to do it to use your resources in an optimized manner.
+
+RUN TIME MEMORY
+
+in run time storage the data is stored in segments such as text segment(Code segment ) , data segment , stack segment and heap segment 
+
+where :
+      -->Code segment :where the compiled program sits in memory
+      --> Global area : initilized data segment...store e global, static and constant data 
+      -->stack segment : where parameter and local variable are allocated
+      --> Heap segment : where dynamically allocated variables are allocated
+How Program manage runtime memory Stack vs Heap?
+
+STACK
+the stack frame contains parameters retrun address , dynamic link , static link , return value and local varaible
+-->memory use in stack is temperory and auto release 
+-->fast processing/low size
+
+HEAP
+--> large pool of memory 
+-->dynamic allocation
+-->must be accessed through a pointer
+large and dynamic
+                
+Memory Allocator
+How Python allocates memory?
+
+Pymalloc is a Python memory allocator, which was written by Vladimir Marangozov. It was introduced with Python 2.1 and become the default with 2.3
+
+Python Use lots of small objects that get created and destroyed frequently
+
+To avoid multiple malloc() and free() call for these purposes, python uses 256KB memory chunk called arena, divided by the 4KB pool
+
+#### Lets see how memory gets allocated and freed by python
+
+Check if any pool already been divided into the block of required size. Each Pool is a singly linked list of each block
+If we found such pool we pop a block off of the list and return back to the application
+If there is no such pool available we will find from free pools linked list, if there is pool available we will pop it off else we create a new pool
+Similarly, if last memory is full we will pop off arena base pointer if there is no space we will use malloc() and create new space
+Similarly for freeing memory similar procedure happened and then allocator put that pool to the free pool list
+
+
+If you able to visualise these, congrats you understood how memory allocator works 🎉
+
+Memory usage by Python
+How much python use memory for different data type?
+
+Unlike ‘C’, Python doesn’t specify data type before assigning value to object. Thus, different data objects behave differently with python
+On different systems (32 Bit, 64 Bit, Linux, Windows) python use different Byte data for the same object
+Debug Memory usage
+How to profile and check Memory usage by your script?
+
+Form of dynamic program analysis to measure usage of resources by the program to optimize our program (e.g. memory profiling for memory usage analysis)
+Profilers use a wide variety of techniques to collect data, including hardware interrupts code instrumentation, instruction set simulation, operating system hooks, and performance counters. Profilers are used in the performance engineering process.
+Program analysis tools are extremely important for understanding program behavior. Computer architects need such tools to evaluate how well programs will perform on new architectures. Software writers need tools to analyze their programs and identify critical sections of code. Compiler writers often use such tools to find out how well their instruction scheduling or branch prediction algorithm is performing…
+
+Some tool to debug
+Memory_profiler: https://pypi.python.org/pypi/memory_profiler
+pympler: https://pythonhosted.org/Pympler/muppy.html
+Vprof: https://pypi.python.org/pypi/vprof/
+
